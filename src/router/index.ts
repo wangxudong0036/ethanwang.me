@@ -36,7 +36,7 @@ const router = createRouter({
 // 全局前置守卫 - 设置页面标题
 router.beforeEach((to, from, next) => {
   // 设置页面标题
-  document.title = `${to.meta.title || '默认标题'} - Vue项目`
+  document.title = `个人博客 | ${to.meta.title || '我的在线空间'}`
   next()
 })
 

@@ -8,7 +8,7 @@ const counterStore = useCounterStore()
 <template>
   <div class="container mx-auto py-8">
     <!-- Pinia 计数器示例 -->
-    <section class="card max-w-2xl mx-auto mb-12">
+    <!-- <section class="card max-w-2xl mx-auto mb-12">
       <h2 class="text-2xl font-bold mb-4 text-secondary after:content-[''] after:block after:w-12 after:h-1 after:bg-primary after:mt-2">Pinia 状态管理示例</h2>
       <div class="text-center py-4">
         <p class="text-xl font-bold mb-4">当前计数: {{ counterStore.count }}</p>
@@ -17,7 +17,7 @@ const counterStore = useCounterStore()
           <button @click="counterStore.decrement()" class="btn bg-danger text-white hover:bg-danger/90">减少</button>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 

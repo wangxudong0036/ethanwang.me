@@ -1,6 +1,21 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh">
   <head>
+    <!-- 暗色模式初始化脚本，防止闪烁 -->
+    <script>
+      (function() {
+        // 检查本地存储中的主题设置
+        const savedTheme = localStorage.getItem('theme');
+        // 检查系统偏好
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // 如果有保存的主题设置，使用它；否则使用系统偏好
+        const isDark = savedTheme === 'dark' || (savedTheme === null && prefersDark);
+        // 应用主题
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
