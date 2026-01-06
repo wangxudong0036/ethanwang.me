@@ -16,7 +16,7 @@
       <h1 class="text-4xl font-bold mt-2 mb-1 text-gray-900 dark:text-white">你的名字</h1>
       <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">职业头衔 | 个人标签</p>
       <div class="flex justify-center space-x-6">
-        <a href="#" target="_blank" class="text-gray-600 hover:text-primary transition-colors">
+        <a href="https://github.com/wangxudong0036" target="_blank" class="text-gray-600 hover:text-primary transition-colors">
           <div class="i-mdi-github text-2xl"></div>
           <span class="sr-only">GitHub</span>
         </a>
@@ -61,8 +61,6 @@
           <h3 class="text-xl font-medium mb-3 text-secondary">后端开发</h3>
           <div class="flex flex-wrap gap-2">
             <span class="px-3 py-1 bg-primary/10 text-primary rounded hover:bg-primary hover:text-white transition-all">Node.js</span>
-            <span class="px-3 py-1 bg-primary/10 text-primary rounded hover:bg-primary hover:text-white transition-all">Python</span>
-            <span class="px-3 py-1 bg-primary/10 text-primary rounded hover:bg-primary hover:text-white transition-all">Java</span>
             <span class="px-3 py-1 bg-primary/10 text-primary rounded hover:bg-primary hover:text-white transition-all">数据库</span>
           </div>
         </div>
@@ -70,7 +68,6 @@
         <div>
           <h3 class="text-xl font-medium mb-3 text-secondary">其他技能</h3>
           <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-primary/10 text-primary rounded hover:bg-primary hover:text-white transition-all">UI/UX 设计</span>
             <span class="px-3 py-1 bg-primary/10 text-primary rounded hover:bg-primary hover:text-white transition-all">项目管理</span>
             <span class="px-3 py-1 bg-primary/10 text-primary rounded hover:bg-primary hover:text-white transition-all">DevOps</span>
           </div>

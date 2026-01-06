@@ -29,6 +29,24 @@ const router = createRouter({
       meta: {
         title: '简历'
       }
+    },
+    {
+      path: '/blog',
+      name: 'blog',
+      // 路由懒加载
+      component: () => import('../views/BlogView.vue'),
+      meta: {
+        title: '博客'
+      }
+    },
+    {
+      path: '/blog/:id',
+      name: 'blog-detail',
+      // 路由懒加载
+      component: () => import('../views/BlogDetailView.vue'),
+      meta: {
+        title: '博客详情'
+      }
     }
   ]
 })
