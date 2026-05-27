@@ -1,0 +1,36 @@
+{
+  "name": "ethanwang-me",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.14.0",
+    "@nuxt/icon": "^2.2.2",
+    "@nuxtjs/robots": "^6.0.9",
+    "@nuxtjs/sitemap": "^8.0.15",
+    "better-sqlite3": "^12.10.0",
+    "nuxt": "^4.4.6",
+    "vue": "^3.5.34",
+    "vue-router": "^5.0.7"
+  },
+  "devDependencies": {
+    "@iconify-json/logos": "^1.2.11",
+    "@iconify-json/mdi": "^1.2.3",
+    "@unocss/nuxt": "^66.7.0",
+    "sass": "^1.100.0",
+    "unocss": "^66.7.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "esbuild",
+      "@parcel/watcher"
+    ]
+  }
+}
