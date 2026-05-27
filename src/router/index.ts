@@ -47,12 +47,30 @@ const router = createRouter({
       meta: {
         title: '博客详情'
       }
+    },
+    {
+      path: '/blog/add',
+      name: 'blog-add',
+      // 路由懒加载
+      component: () => import('../views/BlogAddView.vue'),
+      meta: {
+        title: '发布文章'
+      }
+    },
+    {
+      path: '/uno-classes',
+      name: 'uno-classes',
+      // 路由懒加载
+      component: () => import('../views/UnoClassesView.vue'),
+      meta: {
+        title: 'UnoCSS 类名参考'
+      }
     }
   ]
 })
 
 // 全局前置守卫 - 设置页面标题
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   // 设置页面标题
   document.title = `个人博客 | ${to.meta.title || '我的在线空间'}`
   next()

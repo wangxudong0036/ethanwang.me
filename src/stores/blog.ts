@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { supabase } from '../lib/supabase'
+import type { Database } from '../lib/types/supabase'
 
 // 博客文章接口
 export interface BlogPost {
@@ -11,6 +13,10 @@ export interface BlogPost {
   category: string // 分类（如：开发技巧、心得体会等）
   readTime?: number // 预计阅读时间（分钟）
 }
+
+// Supabase 数据库类型
+type BlogPostRow = Database['public']['Tables']['blog_posts']['Row']
+type BlogPostInsert = Database['public']['Tables']['blog_posts']['Insert']
 
 export const useBlogStore = defineStore('blog', {
   state: () => ({
@@ -169,25 +175,132 @@ type Readonly<T> = {
   },
 
   actions: {
-    // 添加新文章
-    addPost(post: BlogPost) {
-      this.posts.push(post)
+    // 从 Supabase 加载所有文章
+    async loadPosts() {
+      try {
+        const { data, error } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .order('date', { ascending: false })
+
+        if (error) throw error
+
+        // 转换数据库格式到应用格式
+        this.posts = (data || []).map((row: BlogPostRow) => ({
+          id: row.id,
+          title: row.title,
+          content: row.content,
+          excerpt: row.excerpt,
+          date: row.date,
+          tags: row.tags || [],
+          category: row.category,
+          readTime: row.read_time || undefined
+        }))
+      } catch (error) {
+        console.error('加载博客文章失败:', error)
+        throw error
+      }
+    },
+
+    // 创建新文章并保存到 Supabase
+    async createPost(postData: Omit<BlogPost, 'id'>): Promise<BlogPost> {
+      try {
+        // 准备插入数据
+        const insertData: BlogPostInsert = {
+          title: postData.title,
+          content: postData.content,
+          excerpt: postData.excerpt,
+          date: postData.date,
+          tags: postData.tags,
+          category: postData.category,
+          read_time: postData.readTime || null
+        }
+
+        const { data, error } = await supabase
+          .from('blog_posts')
+          .insert(insertData)
+          .select()
+          .single()
+
+        if (error) throw error
+
+        // 转换数据库格式到应用格式
+        const newPost: BlogPost = {
+          id: data.id,
+          title: data.title,
+          content: data.content,
+          excerpt: data.excerpt,
+          date: data.date,
+          tags: data.tags || [],
+          category: data.category,
+          readTime: data.read_time || undefined
+        }
+
+        // 更新本地状态
+        this.posts.unshift(newPost)
+
+        return newPost
+      } catch (error) {
+        console.error('创建博客文章失败:', error)
+        throw error
+      }
     },
 
     // 更新文章
-    updatePost(id: string, updatedPost: Partial<BlogPost>) {
-      const index = this.posts.findIndex((post: BlogPost) => post.id === id)
-      if (index !== -1) {
-        this.posts[index] = { ...this.posts[index], ...updatedPost }
+    async updatePost(id: string, updatedPost: Partial<BlogPost>): Promise<void> {
+      try {
+        // 准备更新数据
+        const updateData: Partial<BlogPostInsert> = {}
+        if (updatedPost.title !== undefined) updateData.title = updatedPost.title
+        if (updatedPost.content !== undefined) updateData.content = updatedPost.content
+        if (updatedPost.excerpt !== undefined) updateData.excerpt = updatedPost.excerpt
+        if (updatedPost.date !== undefined) updateData.date = updatedPost.date
+        if (updatedPost.tags !== undefined) updateData.tags = updatedPost.tags
+        if (updatedPost.category !== undefined) updateData.category = updatedPost.category
+        if (updatedPost.readTime !== undefined) updateData.read_time = updatedPost.readTime || null
+
+        const { error } = await supabase
+          .from('blog_posts')
+          .update(updateData)
+          .eq('id', id)
+
+        if (error) throw error
+
+        // 更新本地状态
+        const index = this.posts.findIndex((post: BlogPost) => post.id === id)
+        if (index !== -1) {
+          this.posts[index] = { ...this.posts[index], ...updatedPost }
+        }
+      } catch (error) {
+        console.error('更新博客文章失败:', error)
+        throw error
       }
     },
 
     // 删除文章
-    deletePost(id: string) {
-      const index = this.posts.findIndex((post: BlogPost) => post.id === id)
-      if (index !== -1) {
-        this.posts.splice(index, 1)
+    async deletePost(id: string): Promise<void> {
+      try {
+        const { error } = await supabase
+          .from('blog_posts')
+          .delete()
+          .eq('id', id)
+
+        if (error) throw error
+
+        // 更新本地状态
+        const index = this.posts.findIndex((post: BlogPost) => post.id === id)
+        if (index !== -1) {
+          this.posts.splice(index, 1)
+        }
+      } catch (error) {
+        console.error('删除博客文章失败:', error)
+        throw error
       }
+    },
+
+    // 添加新文章（本地，已废弃，保留用于兼容）
+    addPost(post: BlogPost) {
+      this.posts.push(post)
     }
   }
 })

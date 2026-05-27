@@ -6,9 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "db:push": "npx supabase@latest db push",
+    "db:execute": "npx supabase@latest db execute -f supabase/migrations/create_blog_posts_table.sql",
+    "db:remote": "npx supabase@latest db remote list",
+    "db:login": "npx supabase@latest login",
+    "db:link": "npx supabase@latest link --project-ref lckifcbvzvzgzixkzrzj"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.89.0",
     "pinia": "^3.0.3",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1"

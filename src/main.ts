@@ -21,4 +21,9 @@ const app = createApp(App)
 app.use(pinia)
 app.use(router)
 
+// 初始化 Supabase 认证（可选，如果需要全局认证状态）
+import { useAuthStore } from './stores/auth'
+const authStore = useAuthStore()
+authStore.init()
+
 app.mount('#app')

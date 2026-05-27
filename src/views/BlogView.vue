@@ -64,7 +64,15 @@ const formatDate = (dateString: string) => {
   <div class="container mx-auto py-8 px-4">
     <!-- 页面标题 -->
     <div class="mb-8 text-center">
-      <h1 class="text-4xl font-bold mb-4 text-secondary">博客日志</h1>
+      <div class="flex items-center justify-center gap-4 mb-4">
+        <h1 class="text-4xl font-bold text-secondary">博客日志</h1>
+        <router-link
+          to="/blog/add"
+          class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+        >
+          + 发布文章
+        </router-link>
+      </div>
       <p class="text-gray-600 dark:text-gray-400">记录日常开发心得与技术分享</p>
     </div>
 

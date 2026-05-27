@@ -61,6 +61,8 @@ const applyTheme = () => {
       <span class="text-gray-400">|</span>
       <router-link to="/blog" class="text-gray-700 dark:text-gray-200 font-medium hover:text-primary dark:hover:text-primary transition-colors">博客</router-link>
       <span class="text-gray-400">|</span>
+      <router-link to="/uno-classes" class="text-gray-700 dark:text-gray-200 font-medium hover:text-primary dark:hover:text-primary transition-colors">UnoCSS</router-link>
+      <span class="text-gray-400">|</span>
       
       <!-- 暗色/亮色主题切换按钮 -->
       <button 
