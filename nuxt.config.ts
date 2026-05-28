@@ -38,6 +38,12 @@ export default defineNuxtConfig({
     },
   },
 
+  vite: {
+    optimizeDeps: {
+      include: []
+    }
+  },
+
   nitro: {
     prerender: {
       crawlLinks: true,
